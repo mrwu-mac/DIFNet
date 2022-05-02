@@ -21,7 +21,7 @@ Note: Python 3.6+ is required to run our code.
 ## Data preparation
 To run the code, annotations and detection features for the COCO dataset are needed. Please download the annotations file [annotations.zip](https://drive.google.com/file/d/1i8mqKFKhqvBr8kEp3DbIh9-9UNAfKGmE/view?usp=sharing) and extract it.
 
-Detection features are computed with the code provided by [1]. To reproduce our result, please download the COCO features file [coco_detections.hdf5](https://drive.google.com/open?id=1MV6dSnqViQfyvgyHrmAT_lLpFbkzp3mx) (~53.5 GB), in which detections of each image are stored under the `<image_id>_features` key. `<image_id>` is the id of each COCO image, without leading zeros (e.g. the `<image_id>` for `COCO_val2014_000000037209.jpg` is `37209`), and each value should be a `(N, 2048)` tensor, where `N` is the number of detections. 
+Detection features are computed with the code provided by [1]. To reproduce our result, please download the COCO grid features from [DLCT](https://github.com/luo3300612/image-captioning-DLCT) or extract it yourself from [1](https://github.com/facebookresearch/grid-feats-vqa).
 
 Segmentation features are computed with the code provided by [2]. To reproduce our result, please download the segmentation features file [segmentations.zip](https://drive.google.com/file/d/1R7GL9FTZgc0cpCoJ6UGWNuhvAiDciab7/view?usp=sharing) (~83M) and extract it.
 
@@ -63,10 +63,10 @@ Run `python train.py` using the following arguments:
 
 mode
 ```
-base: baseline
-base_lrp: baseline with lrp training
+base: baseline model
+base_lrp: baseline model with lrp
 difnet: DIFNet
-difnet_lrp: DIFNet with lro training
+difnet_lrp: DIFNet with lrp
 
 ```
 For example, to train our model with the parameters used in our experiments, use
