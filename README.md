@@ -21,7 +21,7 @@ Note: Python 3.6+ is required to run our code.
 ## Data preparation
 To run the code, annotations and detection features for the COCO dataset are needed. Please download the annotations file [annotations.zip](https://drive.google.com/file/d/1i8mqKFKhqvBr8kEp3DbIh9-9UNAfKGmE/view?usp=sharing) and extract it.
 
-Detection features are computed with the code provided by [1]. To reproduce our result, please download the COCO grid features from [DLCT](https://github.com/luo3300612/image-captioning-DLCT) or extract it yourself from [1](https://github.com/facebookresearch/grid-feats-vqa).
+Detection features are computed with the code provided by [1]. To reproduce our result, please download the COCO grid features from [DLCT](https://github.com/luo3300612/image-captioning-DLCT) or extract it yourself from [grid-feats-vqa](https://github.com/facebookresearch/grid-feats-vqa).
 
 Segmentation features are computed with the code provided by [2]. To reproduce our result, please download the segmentation features file [segmentations.zip](https://drive.google.com/file/d/1R7GL9FTZgc0cpCoJ6UGWNuhvAiDciab7/view?usp=sharing) (~83M) and extract it.
 
