@@ -1,5 +1,5 @@
 # DIFNet: A PyTorch Implementation
-This repository contains the reference code for the paper DIFNet.
+This repository contains the reference code for the paper DIFNet (CVPR 2022).
 
 ## Installation
 Clone the repository and create the `difnet` conda environment using the `environment.yml` file:
