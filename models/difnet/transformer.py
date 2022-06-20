@@ -13,7 +13,7 @@ class Flatten(nn.Module):
         return x.view(x.size(0), 133, -1).permute(0, 2, 1)
 
 
-class Transformer_ILN_skip(CaptioningModel1):
+class Difnet(CaptioningModel1):
     def __init__(self, bos_idx, encoder, decoder):
         super(Difnet, self).__init__()
         self.bos_idx = bos_idx

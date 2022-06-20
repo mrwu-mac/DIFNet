@@ -205,7 +205,7 @@ if __name__ == '__main__':
         decoder = TransformerDecoder(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
         model = Transformer(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
     if args.mode == 'base_lrp':
-        encoder = TransformerEncoder_LRP(3, 0, attention_module=ScaledDotProductAttention_lrp)
+        encoder = TransformerEncoder_LRP(3, 0, attention_module=ScaledDotProductAttention_LRP)
         decoder = TransformerDecoder_LRP(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
         model = Transformer_LRP(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
     if args.mode == 'difnet':
@@ -213,7 +213,7 @@ if __name__ == '__main__':
         decoder = DifnetDecoder(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
         model = Difnet(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
     if args.mode == 'difnet_lrp':
-        encoder = DifnetEncoder_LRP(3, 0, attention_module=ScaledDotProductAttention_lrp)
+        encoder = DifnetEncoder_LRP(3, 0, attention_module=ScaledDotProductAttention_LRP)
         decoder = DifnetDecoder_LRP(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
         model = Difnet_LRP(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
 
