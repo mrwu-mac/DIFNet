@@ -29,7 +29,7 @@ Segmentation features are computed with the code provided by [2]. To reproduce o
 ## Evaluation
 To reproduce the results reported in our paper, download the pretrained model file [DIFNet_lrp.pth](https://drive.google.com/file/d/1aDuiiIJomAvQlS-N7VTsqD45rnOt5Oj2/view?usp=sharing) and place it in the saved_transformer_models folder.
 
-Run `python test.py` using the following arguments:
+Run `sh test.sh` using the following arguments:
 
 | Argument | Possible values |
 |------|------|
@@ -71,20 +71,18 @@ difnet: DIFNet
 difnet_lrp: DIFNet with lrp
 
 ```
-For example, to train our model with the parameters used in our experiments, use
+For example, to train our model with the parameters used in our experiments, use 
 ```
-CUDA_VISIBLE_DEVICES=0 python train.py --mode difnet_lrp --exp_name DIFNet_lrp
+sh train.sh
 ```
 For test,
 ```
-CUDA_VISIBLE_DEVICES=0 python test.py --mode difnet_lrp --exp_name DIFNet_lrp
+sh test.sh
 ```
 
-For LRP, you must first generate caption.json file with `generate_caption.py`, and then use `lrp_total.py` to generate lrp_result.pkl file, finally use `show_lrp.py` to show lrp_result.
+For LRP(you must first generate caption.json file with `generate_caption.py`, and then use `lrp_total.py` to generate lrp_result.pkl file, finally use `show_lrp.py` to show lrp_result.),
 ```
-CUDA_VISIBLE_DEVICES=0 python generate_caption.py --mode difnet_lrp --exp_name DIFNet_lrp
-CUDA_VISIBLE_DEVICES=0 python lrp_total.py --mode difnet_lrp --exp_name DIFNet_lrp
-python show_lrp.py
+sh lrp.sh
 ```
 When the cache can't release, use(for example, nvidia0 for release GPU0)
 ```
