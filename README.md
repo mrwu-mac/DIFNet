@@ -5,7 +5,7 @@ This repository contains the reference code for the paper DIFNet (CVPR 2022).
 Clone the repository and create the `difnet` conda environment using the `environment.yml` file:
 ```
 conda env create -f environment.yml
-conda activate dif
+conda activate difnet
 ```
 
 Then download spacy data by executing the following command:
@@ -78,13 +78,11 @@ For test,
 CUDA_VISIBLE_DEVICES=0 python test.py --mode difnet_lrp --exp_name DIFNet_lrp
 ```
 
-For LRP, you must first generate caption.json file with `generate_caption.py`,
+For LRP, you must first generate caption.json file with `generate_caption.py`, and then use `lrp_total.py` to generate lrp_result.pkl file, finally use `show_lrp.py` to show lrp_result.
 ```
 CUDA_VISIBLE_DEVICES=0 python generate_caption.py --mode difnet_lrp --exp_name DIFNet_lrp
-```
-and then use following command to generate lrp_result.pkl file, and then use `show_lrp.py` to show lrp_result.
-```
 CUDA_VISIBLE_DEVICES=0 python lrp_total.py --mode difnet_lrp --exp_name DIFNet_lrp
+python show_lrp.py
 ```
 When the cache can't release, use(for example, nvidia0 for release GPU0)
 ```
