@@ -15,7 +15,7 @@ python -m spacy download en
 
 Add evaluation module from [evaluation](https://github.com/aimagelab/meshed-memory-transformer/tree/master/evaluation).
 
-Note: Python 3.6+ is required to run our code. 
+Note: Python 3.6+ and Pytorch 1.6+ are required to run our code. 
 
 
 ## Data preparation
@@ -33,6 +33,8 @@ Run `python test.py` using the following arguments:
 
 | Argument | Possible values |
 |------|------|
+| `--exp_name` | Experiment name|
+| `--mode` | select a model mode, ['base', 'base_lrp', 'difnet', 'difnet_lrp']|
 | `--batch_size` | Batch size (default: 10) |
 | `--workers` | Number of workers (default: 0) |
 | `--features_path` | Path to detection features file |
