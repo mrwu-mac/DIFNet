@@ -200,8 +200,8 @@ if __name__ == '__main__':
     parser.add_argument('--exp_name', type=str, default='transformer_grid_original')
     parser.add_argument('--batch_size', type=int, default=1)
     parser.add_argument('--workers', type=int, default=1)
-    parser.add_argument('--model_path', type=str, default='saved_transformer_models')
-    parser.add_argument('--caption_path', type=str, default='./dataset/caption_output')
+    parser.add_argument('--model_path', type=str, default='./output/saved_transformer_models')
+    parser.add_argument('--out_path', type=str, default='./output/output_lrp')
     parser.add_argument('--coco_dataset', default='/DataSet/COCO/val2014', help='path to coco dataset')
     parser.add_argument('--features_path', type=str, default='./dataset/coco_grid_feats2.hdf5')
     parser.add_argument('--annotation_folder', type=str, default='./dataset/m2_annotations')
@@ -248,11 +248,10 @@ if __name__ == '__main__':
         model = Difnet_LRP(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
 
 
-    data = torch.load(os.path.join(args.model_path, args.exp_name + '_best_test.pth'))
+    data = torch.load(os.path.join(args.model_path, args.exp_name + '.pth'))
     model.load_state_dict(data['state_dict'])
     # model.load_state_dict(data['state_dict'], strict=False)
-    base_captions_file = open(os.path.join(args.caption_path, args.exp_name + '.json'), 'r')
-    # our_captions_file = open(os.path.join(args.caption_path, 'channel_1a1_with_number.json'), 'r')
+    base_captions_file = open(os.path.join(args.out_path, args.exp_name + '.json'), 'r')
     base_captions = json.load(base_captions_file)
     # our_captions = json.load(our_captions_file)
     coco = COCO(os.path.join(args.annotation_folder, 'captions_val2014.json'))
@@ -269,5 +268,5 @@ if __name__ == '__main__':
 
     base_captions_file.close()
     # our_captions_file.close()
-    pickle.dump(result, open('/data/relevance_visual/{}_result.pkl'.format(args.exp_name), 'wb'))
+    pickle.dump(result, open(os.path.join(args.out_path, '{}_result.pkl'.format(args.exp_name)), 'wb'))
     # show_source2target(result, "/data/relevance_visual/total_lrp.jpg")

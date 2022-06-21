@@ -6,6 +6,7 @@ import h5py
 import matplotlib.pyplot as plt
 # from pylab import *
 import pylab
+import argparse
 
 from scipy.stats import entropy
 
@@ -36,21 +37,25 @@ def avg_lrp_by_pos(data, seg='inp'):
     res /= count
     return res
 
-def show_source2target(data, data1, data2, pictdir):
+
+def show_source2target(all_data, labels, save_img_contribution):
     # spectral_map = [matplotlib.colors.rgb2hex(cmap(i)[:3]) for i in range(cmap.N)]
 
     # color = spectral_map[-1]
-    color = 'b'
     fig = plt.figure(figsize=(7, 6), dpi=100)
-    res = avg_lrp_by_pos(data, seg='inp')[1:]
-    res1 = avg_lrp_by_pos(data1, seg='inp')[1:]
-    res2 = avg_lrp_by_pos(data2, seg='inp')[1:]
+    for i, (data, label) in enumerate(all_data, labels):
+        res = avg_lrp_by_pos(data, seg='inp')[1:]
+        plt.plot(range(2, 9 + 2), res[:9], label=label)
+
+    # res = avg_lrp_by_pos(data, seg='inp')[1:]
+    # res1 = avg_lrp_by_pos(data1, seg='inp')[1:]
+    # res2 = avg_lrp_by_pos(data2, seg='inp')[1:]
     # plt.plot(range(2, len(res) + 2), res, 'bv-', label='Baseline w/o Enc: extra skip connection')
     # plt.plot(range(2, len(res) + 2), res1, 'g^--', label='Baseline')
     # plt.plot(range(2, len(res) + 2), res2, 'ro-', label='Ours')
-    plt.plot(range(2, 9+2), res[:9], 'bv-', label='Baseline w/o Enc: extra skip connection')
-    plt.plot(range(2, 9+2), res1[:9], 'g^--', label='Baseline')
-    plt.plot(range(2, 9+2), res2[:9], 'ro-', label='Ours')
+    # plt.plot(range(2, 9+2), res[:9], 'bv-', label='Baseline w/o Enc: extra skip connection')
+    # plt.plot(range(2, 9+2), res1[:9], 'g^--', label='Baseline')
+    # plt.plot(range(2, 9+2), res2[:9], 'ro-', label='Ours')
     # plt.plot(range(2, len(res)-3), res[:14], lw=2., color='b')
     # plt.plot(range(2, len(res) - 3), res1[:14], lw=2., color='g')
     # plt.plot(range(2, len(res) - 3), res2[:14], lw=2., color='r')
@@ -65,7 +70,7 @@ def show_source2target(data, data1, data2, pictdir):
     plt.title('visual ⟶ target(k)', size=20)
     plt.grid()
     plt.legend(fontsize=13)
-    pylab.savefig(pictdir, bbox_inches='tight')
+    pylab.savefig(save_img_contribution, bbox_inches='tight')
 
 
 def show_entropy(data, data1, data2, pictdir):
@@ -94,16 +99,18 @@ def show_entropy(data, data1, data2, pictdir):
 
 
 if __name__ == '__main__':
-    dir_res = '/data/relevance_visual/'
-    # exp_name = 'ours_lrp'
+    parser = argparse.ArgumentParser(description='DIFNet')
+    parser.add_argument('--exp_name', type=str, nargs='+', default='DIFNet', help='select one or more lrp_results for showing')
+    parser.add_argument('--out_path', type=str, default='./output/output_lrp')
+    # parser.add_argument('--mode', type=str, default='base', choices=['base', 'base_lrp', 'difnet', 'difnet_lrp'])
+    args = parser.parse_args()
 
-    fname = '{}_result.pkl'.format('encoder_wo_rskip_lrp')
-    fname1 = '{}_result.pkl'.format('base_lrp')
-    fname2 = '{}_result.pkl'.format('ours_lrp')
-    pictdir = dir_res + '{}.jpg'.format('contribution')
-    pictdir1 = dir_res + '{}.jpg'.format('entropy')
-    data = pickle.load(open(dir_res + fname, 'rb'))
-    data1 = pickle.load(open(dir_res + fname1, 'rb'))
-    data2 = pickle.load(open(dir_res + fname2, 'rb'))
-    show_source2target(data, data1, data2, pictdir)
-    # show_entropy(data, data1, data2, pictdir1)
+    save_img_contribution = os.path.join(args.out_path, '{}.jpg'.format('contribution'))
+    save_img_entropy = os.path.join(args.out_path, '{}.jpg'.format('entropy'))
+
+    all_data = []
+    for exp in args.exp_name:
+        fname = '{}_result.pkl'.format(exp)
+        data = pickle.load(open(os.path.join(args.out_path, fname), 'rb'))
+        all_data.append(data)
+    show_source2target(all_data, args.exp_name, save_img_contribution)
