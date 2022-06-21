@@ -1,3 +1,4 @@
+import os
 import pickle
 import numpy as np
 import cv2
@@ -43,7 +44,7 @@ def show_source2target(all_data, labels, save_img_contribution):
 
     # color = spectral_map[-1]
     fig = plt.figure(figsize=(7, 6), dpi=100)
-    for i, (data, label) in enumerate(all_data, labels):
+    for i, (data, label) in enumerate(zip(all_data, labels)):
         res = avg_lrp_by_pos(data, seg='inp')[1:]
         plt.plot(range(2, 9 + 2), res[:9], label=label)
 

@@ -9,4 +9,4 @@ CUDA_VISIBLE_DEVICES=0 python lrp_total.py \
   --exp_name DIFNet_lrp
 
 # show lrp_result
-python show_lrp.py
+python show_lrp.py --exp_name DIFNet_lrp
