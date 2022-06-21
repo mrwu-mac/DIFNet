@@ -80,7 +80,7 @@ For test,
 sh test.sh
 ```
 
-For LRP(you must first generate caption.json file with `generate_caption.py`, and then use `lrp_total.py` to generate lrp_result.pkl file, finally use `show_lrp.py` to show lrp_result.),
+For LRP(first generate caption.json file with `generate_caption.py`, and then use `lrp_total.py` to generate lrp_result.pkl file, finally use `show_lrp.py` to show lrp_result.),
 ```
 sh lrp.sh
 ```
