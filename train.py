@@ -6,7 +6,7 @@ from evaluation import PTBTokenizer, Cider
 from models.transformer import TransformerEncoder, TransformerDecoder, ScaledDotProductAttention, Transformer
 from models.transformer_lrp import TransformerEncoder_LRP, TransformerDecoder_LRP, ScaledDotProductAttention_LRP, Transformer_LRP
 from models.difnet import Difnet, DifnetEncoder, DifnetDecoder
-from models.difnet_lrp import Difnet_LRP, DifnetEncoder_LRP, DifnetDecoder_LRP
+from models.difnet_lrp import Difnet_LRP, DifnetEncoder_LRP
 
 import torch
 from torch.optim import Adam
@@ -166,9 +166,9 @@ if __name__ == '__main__':
     parser.add_argument('--warmup', type=int, default=10000)
     parser.add_argument('--resume_last', action='store_true')
     parser.add_argument('--resume_best', action='store_true')
-    parser.add_argument('--features_path', type=str, default='/dataset/coco_grid_feats2.hdf5')
-    parser.add_argument('--pixel_path', type=str, default='/dataset/segmentations')
-    parser.add_argument('--annotation_folder', type=str, default='/dataset/m2_annotations')
+    parser.add_argument('--features_path', type=str, default='./dataset/coco_grid_feats2.hdf5')
+    parser.add_argument('--pixel_path', type=str, default='./dataset/segmentations')
+    parser.add_argument('--annotation_folder', type=str, default='./dataset/m2_annotations')
     parser.add_argument('--logs_folder', type=str, default='tensorboard_logs')
 
     parser.add_argument('--mode', type=str, default='base', choices=['base', 'base_lrp', 'difnet', 'difnet_lrp'])
@@ -209,12 +209,12 @@ if __name__ == '__main__':
         decoder = TransformerDecoder_LRP(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
         model = Transformer_LRP(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
     if args.mode == 'difnet':
-        encoder = DifnetEncoder(1, 2, 3, 0, skip=True, attention_module=ScaledDotProductAttention)
+        encoder = DifnetEncoder(1, 2, 3, 0, attention_module=ScaledDotProductAttention)
         decoder = DifnetDecoder(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
         model = Difnet(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
     if args.mode == 'difnet_lrp':
         encoder = DifnetEncoder_LRP(3, 0, attention_module=ScaledDotProductAttention_LRP)
-        decoder = DifnetDecoder_LRP(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
+        decoder = TransformerDecoder_LRP(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
         model = Difnet_LRP(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
 
     dict_dataset_train = train_dataset.image_dictionary({'image': image_field, 'text': RawField(), 'pixel': pixel_field})

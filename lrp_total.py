@@ -7,7 +7,7 @@ import evaluation
 from models.transformer import TransformerEncoder, TransformerDecoder, ScaledDotProductAttention, Transformer
 from models.transformer_lrp import TransformerEncoder_LRP, TransformerDecoder_LRP, ScaledDotProductAttention_LRP, Transformer_LRP
 from models.difnet import Difnet, DifnetEncoder, DifnetDecoder
-from models.difnet_lrp import Difnet_LRP, DifnetEncoder_LRP, DifnetDecoder_LRP
+from models.difnet_lrp import Difnet_LRP, DifnetEncoder_LRP
 import torch
 from torch.autograd import Variable
 from tqdm import tqdm
@@ -200,12 +200,12 @@ if __name__ == '__main__':
     parser.add_argument('--exp_name', type=str, default='transformer_grid_original')
     parser.add_argument('--batch_size', type=int, default=1)
     parser.add_argument('--workers', type=int, default=1)
-    parser.add_argument('--model_path', type=str, default='/saved_transformer_models')
-    parser.add_argument('--caption_path', type=str, default='/dataset/caption_output')
+    parser.add_argument('--model_path', type=str, default='saved_transformer_models')
+    parser.add_argument('--caption_path', type=str, default='./dataset/caption_output')
     parser.add_argument('--coco_dataset', default='/DataSet/COCO/val2014', help='path to coco dataset')
-    parser.add_argument('--features_path', type=str, default='/dataset/coco_grid_feats2.hdf5')
-    parser.add_argument('--annotation_folder', type=str, default='/dataset/m2_annotations')
-    parser.add_argument('--pixel_path', type=str, default='/dataset/segmentations')
+    parser.add_argument('--features_path', type=str, default='./dataset/coco_grid_feats2.hdf5')
+    parser.add_argument('--annotation_folder', type=str, default='./dataset/m2_annotations')
+    parser.add_argument('--pixel_path', type=str, default='./dataset/segmentations')
 
     # parser.add_argument('--vocab_path', type=str, default='vocab.pkl')
 
@@ -239,12 +239,12 @@ if __name__ == '__main__':
         decoder = TransformerDecoder_LRP(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
         model = Transformer_LRP(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
     if args.mode == 'difnet':
-        encoder = DifnetEncoder(1, 2, 3, 0, skip=True, attention_module=ScaledDotProductAttention)
+        encoder = DifnetEncoder(1, 2, 3, 0, attention_module=ScaledDotProductAttention)
         decoder = DifnetDecoder(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
         model = Difnet(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
     if args.mode == 'difnet_lrp':
         encoder = DifnetEncoder_LRP(3, 0, attention_module=ScaledDotProductAttention_LRP)
-        decoder = DifnetDecoder_LRP(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
+        decoder = TransformerDecoder_LRP(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
         model = Difnet_LRP(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
 
 
