@@ -78,7 +78,11 @@ For test,
 CUDA_VISIBLE_DEVICES=0 python test.py --mode difnet_lrp --exp_name DIFNet_lrp
 ```
 
-For LRP, you must generate caption.json file with `generate_caption.py` and then use following command to generate lrp_result.pkl file, and then use `show_lrp.py` to show lrp_result.
+For LRP, you must first generate caption.json file with `generate_caption.py`,
+```
+CUDA_VISIBLE_DEVICES=0 python generate_caption.py --mode difnet_lrp --exp_name DIFNet_lrp
+```
+and then use following command to generate lrp_result.pkl file, and then use `show_lrp.py` to show lrp_result.
 ```
 CUDA_VISIBLE_DEVICES=0 python lrp_total.py --mode difnet_lrp --exp_name DIFNet_lrp
 ```

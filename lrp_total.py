@@ -223,7 +223,7 @@ if __name__ == '__main__':
     text_field = TextField(init_token='<bos>', eos_token='<eos>', lower=True, tokenize='spacy',
                            remove_punctuation=True, nopoints=False)
 
-    text_field.vocab = pickle.load(open('/vocab.pkl', 'rb'))
+    text_field.vocab = pickle.load(open('vocab.pkl', 'rb'))
 
     # Model and dataloaders
     # encoder = MemoryAugmentedEncoder(3, 0, attention_module=ScaledDotProductAttentionMemory,
