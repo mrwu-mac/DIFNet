@@ -1,5 +1,16 @@
 # DIFNet: A PyTorch Implementation
-This repository contains the reference code for the paper [DIFNet: Boosting Visual Information Flow for Image Captioning](https://openaccess.thecvf.com/content/CVPR2022/papers/Wu_DIFNet_Boosting_Visual_Information_Flow_for_Image_Captioning_CVPR_2022_paper.pdf) (CVPR 2022).
+This repository contains the reference code for our paper [DIFNet: Boosting Visual Information Flow for Image Captioning](https://openaccess.thecvf.com/content/CVPR2022/papers/Wu_DIFNet_Boosting_Visual_Information_Flow_for_Image_Captioning_CVPR_2022_paper.pdf) (CVPR 2022).
+
+If our work is heleful to you or gives some inspiration to you, please star this project and cite our paper. Thank you!
+```
+@inproceedings{wu2022difnet,
+  title={DIFNet: Boosting Visual Information Flow for Image Captioning},
+  author={Wu, Mingrui and Zhang, Xuying and Sun, Xiaoshuai and Zhou, Yiyi and Chen, Chao and Gu, Jiaxin and Sun, Xing and Ji, Rongrong},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={18020--18029},
+  year={2022}
+}
+```
 
 ## Installation
 Clone the repository and create the `difnet` conda environment using the `environment.yml` file:
