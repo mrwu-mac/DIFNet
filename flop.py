@@ -6,12 +6,10 @@ from torchstat import stat
 from fvcore.nn.flop_count import flop_count
 
 import argparse
-from models.transformer import TransformerEncoder, TransformerDecoderLayer, ScaledDotProductAttention, Transformer
-from models.difnet import TransformerEncoder_ILN_skip, TransformerDecoderLayer_ILN_skip, Transformer_ILN_skip
-from models.transformer_lrp import TransformerEncoder_lrp, TransformerDecoderLayer_lrp, ScaledDotProductAttention_lrp, Transformer_lrp
-from models.difnet_lrp import TransformerEncoder_p3t_lrp, Transformer_p_lrp
-
-
+from models.transformer import TransformerEncoder, TransformerDecoder, ScaledDotProductAttention, Transformer
+from models.transformer_lrp import TransformerEncoder_LRP, TransformerDecoder_LRP, ScaledDotProductAttention_LRP, Transformer_LRP
+from models.difnet import Difnet, DifnetEncoder, DifnetDecoder
+from models.difnet_lrp import Difnet_LRP, DifnetEncoder_LRP
 
 
 device = torch.device('cpu')
@@ -24,22 +22,23 @@ parser.add_argument('--mode', type=str, default='base',
                         choices=['base', 'base_lrp', 'difnet_lrp', 'difnet'])
 args = parser.parse_args()
 
+# Model and dataloaders
 if args.mode == 'base':
     encoder = TransformerEncoder(3, 0, attention_module=ScaledDotProductAttention)
-    decoder = TransformerDecoderLayer(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
+    decoder = TransformerDecoder(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
     model = Transformer(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
 if args.mode == 'base_lrp':
-    encoder = TransformerEncoder_lrp(3, 0, attention_module=ScaledDotProductAttention_lrp)
-    decoder = TransformerDecoderLayer_lrp(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
-    model = Transformer_lrp(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
-if args.mode == 'difnet_lrp':
-    encoder = TransformerEncoder_p3t_lrp(3, 0, attention_module=ScaledDotProductAttention_lrp)
-    decoder = TransformerDecoderLayer_lrp(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
-    model = Transformer_p_lrp(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
+    encoder = TransformerEncoder_LRP(3, 0, attention_module=ScaledDotProductAttention_LRP)
+    decoder = TransformerDecoder_LRP(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
+    model = Transformer_LRP(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
 if args.mode == 'difnet':
-    encoder = TransformerEncoder42172(3, 0, attention_module=ScaledDotProductAttention)
-    decoder = TransformerDecoderLayer42172(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
-    model = Transformer42172(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
+    encoder = DifnetEncoder(1, 2, 3, 0, attention_module=ScaledDotProductAttention)
+    decoder = DifnetDecoder(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
+    model = Difnet(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
+if args.mode == 'difnet_lrp':
+    encoder = DifnetEncoder_LRP(3, 0, attention_module=ScaledDotProductAttention_LRP)
+    decoder = TransformerDecoder_LRP(len(text_field.vocab), 54, 3, text_field.vocab.stoi['<pad>'])
+    model = Difnet_LRP(text_field.vocab.stoi['<bos>'], encoder, decoder).to(device)
 
 
 # net = Model()  # 定义好的网络模型
