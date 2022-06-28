@@ -1,6 +1,6 @@
 # DIFNet: A PyTorch Implementation
 <p align="center">
-  <img src="difnet.pdf" alt="DIFNet" width="320"/>
+  <img src="difnet.png" alt="DIFNet" width="320"/>
 </p>
 
 This repository contains the reference code for our paper [DIFNet: Boosting Visual Information Flow for Image Captioning](https://openaccess.thecvf.com/content/CVPR2022/papers/Wu_DIFNet_Boosting_Visual_Information_Flow_for_Image_Captioning_CVPR_2022_paper.pdf) (CVPR 2022).
