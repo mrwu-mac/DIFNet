@@ -36,9 +36,9 @@ Note: Python 3.6+ and Pytorch 1.6+ are required to run our code.
 ## Data preparation
 To run the code, annotations and detection features for the COCO dataset are needed. Please download the annotations file [annotations.zip](https://drive.google.com/file/d/1i8mqKFKhqvBr8kEp3DbIh9-9UNAfKGmE/view?usp=sharing) and extract it.
 
-Detection features are computed with the code provided by [1]. To reproduce our result, please download the raw COCO grid features from [grid-feats-vqa](https://github.com/facebookresearch/grid-feats-vqa) and process them according to [RSTNet](https://github.com/zhangxuying1004/RSTNet). You can also alternatively download the processed COCO grid features from [DLCT](https://github.com/luo3300612/image-captioning-DLCT).
+Detection features are computed with the code provided by [grid-feats-vqa](https://github.com/facebookresearch/grid-feats-vqa). To reproduce our result, please extract the raw COCO grid features based on [grid-feats-vqa](https://github.com/facebookresearch/grid-feats-vqa) and process them according to [RSTNet](https://github.com/zhangxuying1004/RSTNet). You can also alternatively download the processed COCO grid features from [DLCT](https://github.com/luo3300612/image-captioning-DLCT).
 
-Segmentation features are computed with the code provided by [2]. To reproduce our result, please download the segmentation features file [segmentations.zip](https://drive.google.com/file/d/1R7GL9FTZgc0cpCoJ6UGWNuhvAiDciab7/view?usp=sharing) (~83M) and extract it.
+Segmentation features are computed with the code provided by [UPSNet](https://github.com/uber-research/UPSNet). To reproduce our result, please download the segmentation features file [segmentations.zip](https://drive.google.com/file/d/1R7GL9FTZgc0cpCoJ6UGWNuhvAiDciab7/view?usp=sharing) (~83M) and extract it.
 
 
 ## Evaluation
@@ -104,9 +104,5 @@ When the cache can't release, use(for example, nvidia0 for release GPU0)
 fuser -v /dev/nvidia0 |awk '{for(i=1;i<=NF;i++)print "kill -9 " $i;}' | sh
 ```
 
-#### References
-[1] HuaizuJiang,IshanMisra,MarcusRohrbach,ErikLearned- Miller, and Xinlei Chen. In defense of grid features for visual question answering. In Proceedings of the IEEE/CVF Con- ference on Computer Vision and Pattern Recognition, 2020.
-
-[2] Yuwen Xiong, Renjie Liao, Hengshuang Zhao, Rui Hu, Min Bai, Ersin Yumer, and Raquel Urtasun. Upsnet: A unified panoptic segmentation network. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2019.
-
-[3] Marcella Cornia, Matteo Stefanini, Lorenzo Baraldi, and Rita Cucchiara. Meshed-memory transformer for image captioning. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2020.
+## Acknowledge
+This repo is based on [M^2 Transformer](https://github.com/aimagelab/meshed-memory-transformer), [the-story-of-heads](https://github.com/lena-voita/the-story-of-heads) and [Transformer-Explainability](https://github.com/hila-chefer/Transformer-Explainability).
