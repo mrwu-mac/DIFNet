@@ -36,7 +36,7 @@ Note: Python 3.6+ and Pytorch 1.6+ are required to run our code.
 ## Data preparation
 To run the code, annotations and detection features for the COCO dataset are needed. Please download the annotations file [annotations.zip](https://drive.google.com/file/d/1i8mqKFKhqvBr8kEp3DbIh9-9UNAfKGmE/view?usp=sharing) and extract it.
 
-Detection features are computed based on the code provided by [grid-feats-vqa](https://github.com/facebookresearch/grid-feats-vqa). To reproduce our result, please extract the raw COCO grid features process them according to [RSTNet](https://github.com/zhangxuying1004/RSTNet). You can also alternatively download the processed image features [coco_grid_feats](https://pan.baidu.com/s/1myelTYJE8a1HDZHkoccfIA) with the extraction code ```cvpr``` for convenience.
+Detection features are computed based on the project [grid-feats-vqa](https://github.com/facebookresearch/grid-feats-vqa). To reproduce our result, please extract the raw COCO grid features process them according to [RSTNet](https://github.com/zhangxuying1004/RSTNet). You can also alternatively download the processed image features [coco_grid_feats](https://pan.baidu.com/s/1myelTYJE8a1HDZHkoccfIA) with the extraction code ```cvpr``` for convenience.
 
 Segmentation features are computed with the code provided by [UPSNet](https://github.com/uber-research/UPSNet). To reproduce our result, please download the segmentation features file [segmentations.zip](https://drive.google.com/file/d/1R7GL9FTZgc0cpCoJ6UGWNuhvAiDciab7/view?usp=sharing) (~83M) and extract it.
 
